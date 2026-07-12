@@ -106,7 +106,7 @@
               <a class="text-link" href="mailto:{{ site.data.profile.emails.last }}">Get in touch <span aria-hidden="true">→</span></a>
             </div>
           </div>
-          <aside class="intro__aside" aria-label="Profile and research areas">
+          <aside class="intro__aside" aria-label="Profile and fields">
             <figure class="portrait">
               <img
                 src="{{ site.data.profile.portrait | relative_url }}"
@@ -117,7 +117,7 @@
               >
             </figure>
             <div class="research-areas">
-              <h2>Research areas</h2>
+              <h2>Fields</h2>
               <ul>
                 {% for area in site.data.profile.research_areas %}
                   <li>{{ area }}</li>
