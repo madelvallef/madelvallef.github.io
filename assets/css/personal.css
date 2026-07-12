@@ -427,6 +427,9 @@ h3 {
   margin-bottom: clamp(1.6rem, 3vw, 2.25rem);
   max-width: 60rem;
 }
+.paper__header h3 {
+  color: var(--accent);
+}
 
 .paper__content {
   align-items: start;
