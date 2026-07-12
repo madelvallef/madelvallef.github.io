@@ -430,6 +430,9 @@ h3 {
 .paper__header h3 {
   color: var(--accent);
 }
+.wip h3 {
+  color: var(--accent);
+}
 
 .paper__content {
   align-items: start;
