@@ -56,7 +56,11 @@
         if (!visible) return;
         navLinks.forEach((link) => {
           const isActive = link.getAttribute("href") === `#${visible.target.id}`;
-          link.toggleAttribute("aria-current", isActive);
+          if (isActive) {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
+          }
         });
       },
       { rootMargin: "-35% 0px -55% 0px", threshold: [0, 0.2, 0.5] }
@@ -71,4 +75,45 @@
   nav?.addEventListener("focusout", (event) => {
     if (!nav.contains(event.relatedTarget) && !navToggle?.contains(event.relatedTarget)) closeNavigation();
   });
+
+  const previewAspectRatio = 615 / 792;
+  const paperPreviews = [...document.querySelectorAll(".paper")];
+  let previewSyncFrame;
+
+  const syncPaperPreviews = () => {
+    previewSyncFrame = undefined;
+    const wideLayout = window.matchMedia("(min-width: 761px)").matches;
+
+    paperPreviews.forEach((paper) => {
+      const abstract = paper.querySelector(".paper__abstract");
+      if (!abstract || !wideLayout) {
+        paper.style.removeProperty("--paper-preview-width");
+        return;
+      }
+
+      if (!abstract.open) return;
+
+      const targetWidth = Math.ceil(abstract.getBoundingClientRect().height * previewAspectRatio);
+      const currentWidth = Number.parseFloat(paper.style.getPropertyValue("--paper-preview-width"));
+
+      if (!Number.isFinite(currentWidth) || Math.abs(targetWidth - currentWidth) > 1) {
+        paper.style.setProperty("--paper-preview-width", `${targetWidth}px`);
+      }
+    });
+  };
+
+  const schedulePaperPreviewSync = () => {
+    if (previewSyncFrame) return;
+    previewSyncFrame = window.requestAnimationFrame(syncPaperPreviews);
+  };
+
+  if (paperPreviews.length && "ResizeObserver" in window) {
+    const previewObserver = new ResizeObserver(schedulePaperPreviewSync);
+    paperPreviews.forEach((paper) => {
+      paper.querySelector(".paper__abstract") && previewObserver.observe(paper.querySelector(".paper__abstract"));
+      paper.querySelector(".paper__abstract")?.addEventListener("toggle", schedulePaperPreviewSync);
+    });
+    window.addEventListener("resize", schedulePaperPreviewSync, { passive: true });
+    schedulePaperPreviewSync();
+  }
 })();
