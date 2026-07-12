@@ -366,6 +366,14 @@ h3 {
   gap: 0.34rem;
   margin-top: 1.15rem;
 }
+.contact-links__label {
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.05rem;
+  text-transform: uppercase;
+}
 .contact-links a {
   color: var(--muted);
   font-size: 0.82rem;
