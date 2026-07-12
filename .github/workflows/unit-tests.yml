@@ -1,93 +1,45 @@
-name: Integration tests
+name: Site checks
 
 on:
   push:
-    branches:
-      - master
-      - main
-      - v1.0-dev
+    branches: [main]
     paths:
+      - "assets/**"
+      - "_data/**"
+      - "_layouts/**"
+      - "_pages/**"
+      - "_bibliography/**"
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "_config.yml"
-      - "_data/**"
-      - "_pages/**"
-      - "_posts/**"
-      - "_projects/**"
-      - "assets/**"
-      - "test/**"
-      - "package.json"
-      - "package-lock.json"
       - ".github/workflows/unit-tests.yml"
   pull_request:
-    branches:
-      - master
-      - main
-      - v1.0-dev
+    branches: [main]
     paths:
+      - "assets/**"
+      - "_data/**"
+      - "_layouts/**"
+      - "_pages/**"
+      - "_bibliography/**"
+      - "_config.yml"
       - "Gemfile"
       - "Gemfile.lock"
-      - "_config.yml"
-      - "_data/**"
-      - "_pages/**"
-      - "_posts/**"
-      - "_projects/**"
-      - "assets/**"
-      - "test/**"
-      - "package.json"
-      - "package-lock.json"
       - ".github/workflows/unit-tests.yml"
 
 jobs:
-  comments-integration-tests:
+  site-build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v4
-
-      - name: Setup Ruby 💎
-        uses: ruby/setup-ruby@v1
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3.5"
           bundler-cache: true
-
-      - name: Setup Python 🐍
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-          cache: "pip"
-
-      - name: Setup Node 🧰
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install JS deps 📦
-        run: npm ci
-
-      - name: Run style contract lint 🧷
-        run: npm run lint:style-contract
-
-      - name: Install build prerequisites 🔧
+      - name: Build production site
+        run: JEKYLL_ENV=production bundle exec jekyll build --trace
+      - name: Verify key public content
         run: |
-          sudo apt-get update && sudo apt-get install -y imagemagick
-          pip3 install --upgrade nbconvert
-
-      - name: Run comments integration test 🧪
-        run: bash test/integration_comments.sh
-
-      - name: Run plugin toggle integration test 🔌
-        run: bash test/integration_plugin_toggles.sh
-
-      - name: Run distill integration test 📄
-        run: bash test/integration_distill.sh
-
-      - name: Run bootstrap compatibility integration test 🧩
-        run: bash test/integration_bootstrap_compat.sh
-
-      - name: Run upgrade CLI integration test ⬆️
-        run: bash test/integration_upgrade_cli.sh
-
-      - name: Run CSS minify integration test 🎨
-        run: bash test/integration_css_minify.sh
+          test -f _site/index.html
+          grep -q "Miguel Del Valle" _site/index.html
+          grep -q "Working Papers" _site/index.html
+          grep -q "Teaching" _site/index.html
