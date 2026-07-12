@@ -686,10 +686,17 @@ h3 {
     max-width: 550px;
   }
   .portrait {
+    align-self: stretch;
     grid-row: 1 / span 2;
+    height: 100%;
     margin: 0;
     padding: 0;
     border-bottom: 0;
+  }
+  .portrait img {
+    aspect-ratio: auto;
+    height: 100%;
+    object-position: center 28%;
   }
   .research-areas {
     align-self: start;
