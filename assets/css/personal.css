@@ -688,13 +688,17 @@ h3 {
     grid-template-columns: 1fr;
   }
   .intro__aside {
+    --profile-square: clamp(180px, 35vw, 210px);
     display: grid;
-    gap: 1.3rem 1.5rem;
-    grid-template-columns: minmax(130px, 0.62fr) 1fr;
+    gap: 0.75rem 1.25rem;
+    grid-template-columns: var(--profile-square) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) minmax(0, 0.78fr);
+    height: var(--profile-square);
     max-width: 550px;
   }
   .portrait {
     grid-row: 1 / span 2;
+    height: var(--profile-square);
     margin: 0;
     padding: 0;
     border-bottom: 0;
@@ -703,11 +707,14 @@ h3 {
     align-self: start;
     grid-column: 2;
     grid-row: 1;
+    min-height: 0;
+    padding-bottom: 0.55rem;
   }
   .contact-links {
     grid-column: 2;
     grid-row: 2;
     margin-top: 0;
+    min-height: 0;
   }
   .paper {
     padding-bottom: 0;
@@ -795,11 +802,7 @@ h3 {
     min-height: 2.55rem;
   }
   .intro__aside {
-    gap: 1rem 1.25rem;
-    grid-template-columns: 125px minmax(0, 1fr);
-  }
-  .portrait {
-    max-width: 125px;
+    --profile-square: 180px;
   }
   .research-areas {
     padding-bottom: 0.65rem;
