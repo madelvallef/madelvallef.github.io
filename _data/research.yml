@@ -1,0 +1,38 @@
+- id: geographic-sectoral-productivity
+  section: working-papers
+  order: 1
+  featured: true
+  title: The Geographic and Sectoral Impact of Productivity
+  authors:
+    - name: Miguel Del Valle
+    - name: Federico Huneeus
+      url: https://www.fedehuneeus.com/
+  status: Submitted
+  pdf: https://www.fedehuneeus.com/s/HdV.pdf
+  bibtex: /assets/bibliography/geographic-sectoral-productivity.bib
+  preview: /assets/img/research/geographic-sectoral-productivity.png
+  preview_alt: First-page preview of The Geographic and Sectoral Impact of Productivity
+  abstract: >-
+    To understand the geographic and sectoral impact of productivity, we build,
+    to our knowledge, the first input-output matrix disaggregated at the
+    geographic level within a country using unique administrative data
+    harmonized to match national accounts. We use Chilean data to calibrate a
+    state-of-the-art general equilibrium quantitative trade model with
+    production networks, labor mobility, firm selection, international and
+    domestic trade, congestion of fixed factors, and knowledge diffusion. We
+    consider two applications. First, we study the aggregate effects of local
+    productivity shocks. We show that location-sector interactions are crucial:
+    locations and sectors separately account for less than half of the
+    dispersion in GDP elasticities from location-sector-specific productivity
+    shocks. Geography-specific input-output linkages explain 17% of the
+    dispersion, mainly due to the role played by small and influential markets.
+    Second, we analyze the exit of a large steel plant. We show that
+    geographically disaggregated production linkages substantially increase the
+    propagation of the plant exit.
+  keywords:
+    - Productivity
+    - Spatial Economics
+    - Geographic Distribution
+    - Input-Output Linkages
+    - Trade
+    - Labor Mobility

@@ -1,0 +1,25 @@
+- order: 1
+  name: Eduardo Engel
+  title: Professor Titular
+  department: Department of Economics
+  institution: University of Chile
+  email: emraengel@gmail.com
+  website: https://www.eduardoengel.com/
+  phone: "+56 22 978-1942"
+  office_address: Diagonal Paraguay 257, Floor 14, Santiago, Chile
+- order: 2
+  name: Federico Huneeus
+  title: Assistant Professor of Economics
+  department: Department of Economics
+  institution: Duke University
+  email: federico.huneeus@duke.edu
+  website: https://www.fedehuneeus.com/
+  phone: "+1 (919) 660-1800"
+  office_address: 213 Social Sciences, 419 Chapel Drive, Box 90097, Durham, NC 27708-0097, USA
+- order: 3
+  name: Luis Felipe Céspedes
+  title: Professor Titular
+  department: Department of Economics
+  institution: University of Chile
+  email: lfcespedes@fen.uchile.cl
+  website: https://econ.uchile.cl/academico/luis-felipe-cespedes/
