@@ -87,14 +87,17 @@
         <div class="intro__image" aria-hidden="true"></div>
         <div class="section-shell intro__content">
           <div class="intro__identity">
-            <p class="intro__role">{{ site.data.profile.role }}</p>
             <h1 id="about-title">{{ site.data.profile.name }}</h1>
-            <p class="intro__lead">{{ site.data.profile.bio }}</p>
+            <div class="intro__lead">
+              {% for paragraph in site.data.profile.bio %}
+                <p>{{ paragraph }}</p>
+              {% endfor %}
+            </div>
             <div class="intro__actions">
               <a class="button button--solid" href="{{ site.data.profile.cv | relative_url }}" target="_blank" rel="noopener"
                 >View CV <span aria-hidden="true">↗</span></a
               >
-              <a class="text-link" href="mailto:{{ site.data.profile.emails.first }}">Get in touch <span aria-hidden="true">→</span></a>
+              <a class="text-link" href="mailto:{{ site.data.profile.emails.last }}">Get in touch <span aria-hidden="true">→</span></a>
             </div>
           </div>
           <aside class="intro__aside" aria-label="Profile and research areas">
@@ -119,9 +122,12 @@
               {% for email in site.data.profile.emails %}
                 <a href="mailto:{{ email }}">{{ email }}</a>
               {% endfor %}
-              <a href="{{ site.data.profile.linkedin }}" target="_blank" rel="noopener" aria-label="Miguel Del Valle on LinkedIn"
-                >LinkedIn <span aria-hidden="true">↗</span></a
-              >
+              <a class="icon-link" href="{{ site.data.profile.linkedin }}" target="_blank" rel="noopener" aria-label="Miguel Del Valle on LinkedIn">
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M5.2 3.5a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4ZM3.8 8.3h2.8v11.9H3.8V8.3Zm4.6 0h2.7v1.6h.1c.4-.7 1.5-2 3.5-2 3.7 0 4.4 2.4 4.4 5.6v6.7h-2.8v-5.9c0-1.4 0-3.3-2-3.3s-2.3 1.6-2.3 3.2v6h-2.8V8.3Z"/>
+                </svg>
+                <span class="sr-only">LinkedIn</span>
+              </a>
               {% if site.data.profile.google_scholar %}
                 <a href="{{ site.data.profile.google_scholar }}" target="_blank" rel="noopener" aria-label="Miguel Del Valle on Google Scholar"
                   >Google Scholar <span aria-hidden="true">↗</span></a
@@ -135,19 +141,13 @@
       <section class="section section--research" id="working-papers" aria-labelledby="working-papers-title">
         <div class="section-shell">
           <div class="section-heading">
-            <p class="section-heading__index">Research</p>
             <h2 id="working-papers-title">Working Papers</h2>
           </div>
           <div class="paper-list">
             {% assign papers = site.data.research | where: 'section', 'working-papers' | sort: 'order' %}
             {% for paper in papers %}
               <article class="paper" aria-labelledby="{{ paper.id }}-title">
-                {% if paper.preview %}
-                  <a class="paper__preview" href="{{ paper.pdf }}" target="_blank" rel="noopener" aria-label="Open {{ paper.title }} PDF">
-                    <img src="{{ paper.preview | relative_url }}" width="615" height="792" loading="lazy" alt="{{ paper.preview_alt }}">
-                  </a>
-                {% endif %}
-                <div class="paper__body">
+                <div class="paper__header">
                   <div class="paper__meta">
                     <span class="paper__status">{{ paper.status }}</span>
                   </div>
@@ -164,32 +164,41 @@
                       {%- endunless %}
                     {% endfor %}
                   </p>
-                  <details class="paper__abstract" open>
-                    <summary>Abstract</summary>
-                    <p>{{ paper.abstract }}</p>
-                  </details>
-                  {% if paper.keywords %}
-                    <p class="paper__keywords"><span>Keywords</span> {{ paper.keywords | join: ' · ' }}</p>
+                </div>
+                <div class="paper__content">
+                  {% if paper.preview %}
+                    <a class="paper__preview" href="{{ paper.pdf }}" target="_blank" rel="noopener" aria-label="Open {{ paper.title }} PDF">
+                      <img src="{{ paper.preview | relative_url }}" width="615" height="792" loading="lazy" alt="{{ paper.preview_alt }}">
+                    </a>
                   {% endif %}
-                  <div class="paper__links" aria-label="{{ paper.title }} resources">
-                    {% if paper.pdf -%}
-                      <a href="{{ paper.pdf }}" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
-                    {%- endif %}
-                    {% if paper.bibtex -%}
-                      <a href="{{ paper.bibtex | relative_url }}" download>BibTeX <span aria-hidden="true">↓</span></a>
-                    {%- endif %}
-                    {% if paper.slides -%}
-                      <a href="{{ paper.slides }}" target="_blank" rel="noopener">Slides <span aria-hidden="true">↗</span></a>
-                    {%- endif %}
-                    {% if paper.appendix -%}
-                      <a href="{{ paper.appendix }}" target="_blank" rel="noopener">Appendix <span aria-hidden="true">↗</span></a>
-                    {%- endif %}
-                    {% if paper.code -%}
-                      <a href="{{ paper.code }}" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
-                    {%- endif %}
-                    {% if paper.data -%}
-                      <a href="{{ paper.data }}" target="_blank" rel="noopener">Data <span aria-hidden="true">↗</span></a>
-                    {%- endif %}
+                  <div class="paper__body">
+                    <details class="paper__abstract" open>
+                      <summary>Abstract</summary>
+                      <p>{{ paper.abstract }}</p>
+                      {% if paper.keywords %}
+                        <p class="paper__keywords"><span>Keywords</span> {{ paper.keywords | join: ' · ' }}</p>
+                      {% endif %}
+                    </details>
+                    <div class="paper__links" aria-label="{{ paper.title }} resources">
+                      {% if paper.pdf -%}
+                        <a href="{{ paper.pdf }}" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+                      {%- endif %}
+                      {% if paper.bibtex -%}
+                        <a href="{{ paper.bibtex | relative_url }}" download>BibTeX <span aria-hidden="true">↓</span></a>
+                      {%- endif %}
+                      {% if paper.slides -%}
+                        <a href="{{ paper.slides }}" target="_blank" rel="noopener">Slides <span aria-hidden="true">↗</span></a>
+                      {%- endif %}
+                      {% if paper.appendix -%}
+                        <a href="{{ paper.appendix }}" target="_blank" rel="noopener">Appendix <span aria-hidden="true">↗</span></a>
+                      {%- endif %}
+                      {% if paper.code -%}
+                        <a href="{{ paper.code }}" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
+                      {%- endif %}
+                      {% if paper.data -%}
+                        <a href="{{ paper.data }}" target="_blank" rel="noopener">Data <span aria-hidden="true">↗</span></a>
+                      {%- endif %}
+                    </div>
                   </div>
                 </div>
               </article>
@@ -199,9 +208,8 @@
       </section>
 
       <section class="section section--quiet" id="work-in-progress" aria-labelledby="work-in-progress-title">
-        <div class="section-shell section-shell--narrow">
+        <div class="section-shell">
           <div class="section-heading">
-            <p class="section-heading__index">Research</p>
             <h2 id="work-in-progress-title">Work in Progress</h2>
           </div>
         </div>
@@ -210,7 +218,6 @@
       <section class="section" id="references" aria-labelledby="references-title">
         <div class="section-shell">
           <div class="section-heading">
-            <p class="section-heading__index">Contact</p>
             <h2 id="references-title">References</h2>
           </div>
           <div class="reference-list">
@@ -218,11 +225,12 @@
             {% for reference in references %}
               <article class="reference">
                 <h3>{{ reference.name }}</h3>
-                <p>
-                  {{ reference.title -}}
-                  {%- if reference.department %}, {{ reference.department }}{% endif -%}
-                  <br>
-                  {{ reference.institution }}
+                <p class="reference__position">
+                  <span>{{ reference.title }}</span>
+                  {% if reference.department -%}
+                    <span>{{ reference.department }}</span>
+                  {%- endif %}
+                  <span>{{ reference.institution }}</span>
                 </p>
                 <p class="reference__links">
                   <a href="mailto:{{ reference.email }}">{{ reference.email }}</a

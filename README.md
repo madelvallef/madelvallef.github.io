@@ -27,15 +27,15 @@ npm.cmd run lint:prettier
 
 ## Updating site content
 
-| Change                                            | File or folder                             | What to edit                                                                              |
-| ------------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------------- |
-| Biography, research areas, contact links, CV path | `_data/profile.yml`                        | Update the relevant field. Leave `google_scholar` empty until a valid profile URL exists. |
-| Profile photo                                     | `assets/img/profile/miguel-del-valle.webp` | Replace the file while preserving the filename; use a square, optimized image.            |
-| Introductory landscape                            | `assets/img/landing-background.webp`       | Replace with an optimized wide WebP image.                                                |
-| CV                                                | `assets/files/miguel-del-valle-cv.pdf`     | Replace this one file; no code change is required.                                        |
-| Working papers and work in progress               | `_data/research.yml`                       | Add, edit, reorder, or promote entries.                                                   |
-| References                                        | `_data/references.yml`                     | Add or reorder fields using `order`. Phone and address are stored but not displayed.      |
-| Site metadata and canonical domain                | `_config.yml`                              | Update only for site-wide settings or a future custom domain.                             |
+| Change                                            | File or folder                             | What to edit                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Biography, research areas, contact links, CV path | `_data/profile.yml`                        | Update the paragraphs in `bio` and the relevant field. Leave `google_scholar` empty until a valid profile URL exists. |
+| Profile photo                                     | `assets/img/profile/miguel-del-valle.webp` | Replace the file while preserving the filename; use a square, optimized image.                                        |
+| Introductory landscape                            | `assets/img/landing-background.webp`       | Replace with an optimized wide WebP image.                                                                            |
+| CV                                                | `assets/files/miguel-del-valle-cv.pdf`     | Replace this one file; no code change is required.                                                                    |
+| Working papers and work in progress               | `_data/research.yml`                       | Add, edit, reorder, or promote entries.                                                                               |
+| References                                        | `_data/references.yml`                     | Add or reorder fields using `order`. Phone and address are stored but not displayed.                                  |
+| Site metadata and canonical domain                | `_config.yml`                              | Update only for site-wide settings or a future custom domain.                                                         |
 
 ### Add a working paper
 
