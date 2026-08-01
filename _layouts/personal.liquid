@@ -170,10 +170,10 @@
             {% for paper in papers %}
               <article class="paper" aria-labelledby="{{ paper.id }}-title">
                 <div class="paper__header">
-                  <div class="paper__meta">
-                    <span class="paper__status">{{ paper.status }}</span>
+                  <div class="paper__title-row">
+                    <h3 id="{{ paper.id }}-title">{{ paper.title }}</h3>
+                    <span class="paper__status paper__status--v2">{{ paper.status }}</span>
                   </div>
-                  <h3 id="{{ paper.id }}-title">{{ paper.title }}</h3>
                   <p class="paper__authors">
                     <span>with</span>
                     {% assign has_collaborator = false %}
