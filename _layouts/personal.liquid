@@ -213,9 +213,6 @@
                       {% if paper.bid_working_paper -%}
                         <a href="{{ paper.bid_working_paper }}" target="_blank" rel="noopener">{{ paper.bid_working_paper_label | default: 'IDB Working Paper' }} <span aria-hidden="true">↗</span></a>
                       {%- endif %}
-                      {% if paper.bid_metadata -%}
-                        <a href="{{ paper.bid_metadata }}" target="_blank" rel="noopener">Metadata <span aria-hidden="true">↗</span></a>
-                      {%- endif %}
                       {% if paper.bibtex -%}
                         <a href="{{ paper.bibtex | relative_url }}" download>BibTeX <span aria-hidden="true">↓</span></a>
                       {%- endif %}
