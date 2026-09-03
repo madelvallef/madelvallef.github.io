@@ -435,6 +435,20 @@ h3 {
   height: 1.16rem;
   width: 1.16rem;
 }
+.orcid-mark {
+  align-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  font-family: var(--sans);
+  font-size: 0.58rem;
+  font-weight: 700;
+  height: 1.16rem;
+  justify-content: center;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  width: 1.16rem;
+}
 
 .section--research {
   background: var(--surface);

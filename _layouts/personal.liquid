@@ -34,9 +34,10 @@
         "email": {{ site.data.profile.emails.first | jsonify }},
         "url": {{ site.url | jsonify }},
         "sameAs": [
+          {{ site.data.profile.google_scholar | jsonify }},
+          {{ site.data.profile.orcid | jsonify }},
           {{ site.data.profile.linkedin | jsonify }},
-          {{ site.data.profile.twitter | jsonify }},
-          {{ site.data.profile.google_scholar | jsonify }}
+          {{ site.data.profile.twitter | jsonify }}
         ],
         "alumniOf": {
           "@type": "CollegeOrUniversity",
@@ -129,30 +130,40 @@
               {% for email in site.data.profile.emails %}
                 <a href="mailto:{{ email }}">{{ email }}</a>
               {% endfor %}
-              <div class="professional-links" aria-label="Professional profiles">
-                <a class="icon-link" href="{{ site.data.profile.linkedin }}" target="_blank" rel="noopener" aria-label="Miguel Del Valle on LinkedIn">
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M5.2 3.5a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4ZM3.8 8.3h2.8v11.9H3.8V8.3Zm4.6 0h2.7v1.6h.1c.4-.7 1.5-2 3.5-2 3.7 0 4.4 2.4 4.4 5.6v6.7h-2.8v-5.9c0-1.4 0-3.3-2-3.3s-2.3 1.6-2.3 3.2v6h-2.8V8.3Z"/>
-                  </svg>
-                  <span class="sr-only">LinkedIn</span>
-                </a>
-                <a class="icon-link" href="{{ site.data.profile.twitter }}" target="_blank" rel="noopener" aria-label="Miguel Del Valle on X">
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
-                  </svg>
-                  <span class="sr-only">X</span>
-                </a>
+              <div class="professional-links" aria-label="Academic profiles">
                 <a
                   class="icon-link"
                   href="{{ site.data.profile.google_scholar }}"
                   target="_blank"
-                  rel="noopener"
+                  rel="me noopener"
                   aria-label="Miguel Del Valle on Google Scholar"
                 >
                   <svg aria-hidden="true" viewBox="0 0 24 24">
                     <path d="m12 3-9 5 9 5 7.36-4.09V14H21V8L12 3Zm-5 8.22V16c0 2.21 2.24 4 5 4s5-1.79 5-4v-4.78L12 14l-5-2.78Z"/>
                   </svg>
                   <span class="sr-only">Google Scholar</span>
+                </a>
+                <a
+                  class="icon-link"
+                  href="{{ site.data.profile.orcid }}"
+                  target="_blank"
+                  rel="me noopener"
+                  aria-label="Miguel Del Valle on ORCID"
+                >
+                  <span class="orcid-mark" aria-hidden="true">iD</span>
+                  <span class="sr-only">ORCID</span>
+                </a>
+                <a class="icon-link" href="{{ site.data.profile.linkedin }}" target="_blank" rel="me noopener" aria-label="Miguel Del Valle on LinkedIn">
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M5.2 3.5a1.7 1.7 0 1 1 0 3.4 1.7 1.7 0 0 1 0-3.4ZM3.8 8.3h2.8v11.9H3.8V8.3Zm4.6 0h2.7v1.6h.1c.4-.7 1.5-2 3.5-2 3.7 0 4.4 2.4 4.4 5.6v6.7h-2.8v-5.9c0-1.4 0-3.3-2-3.3s-2.3 1.6-2.3 3.2v6h-2.8V8.3Z"/>
+                  </svg>
+                  <span class="sr-only">LinkedIn</span>
+                </a>
+                <a class="icon-link" href="{{ site.data.profile.twitter }}" target="_blank" rel="me noopener" aria-label="Miguel Del Valle on X">
+                  <svg aria-hidden="true" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z"/>
+                  </svg>
+                  <span class="sr-only">X</span>
                 </a>
               </div>
             </div>
