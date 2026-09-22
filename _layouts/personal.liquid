@@ -326,9 +326,16 @@
         <span
           >© {{ 'now' | date: '%Y' }}
           {{ site.data.profile.name -}}</span
-        ><a href="#about">Back to top ↑</a>
+        >
+        <div class="site-footer__links">
+          <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+          <button type="button" data-analytics-settings>Analytics settings</button>
+          <a href="#about">Back to top ↑</a>
+        </div>
       </div>
     </footer>
+    {% include analytics-consent.liquid %}
     <script src="{{ '/assets/js/personal.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/analytics-consent.js' | relative_url }}" data-measurement-id="{{ site.google_analytics }}" defer></script>
   </body>
 </html>
