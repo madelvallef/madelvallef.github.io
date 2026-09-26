@@ -35,4 +35,4 @@ Links to GitHub, Google, universities, publishers, social networks, data portals
 
 The site may be corrected, updated, suspended, or removed without notice. These terms may be updated when the site's features or legal context change. Chilean law applies to these terms to the extent applicable.
 
-See also the [privacy notice]({{ '/privacy/' | relative_url }}), [cookie policy]({{ '/cookies/' | relative_url }}), and [refund policy]({{ '/refunds/' | relative_url }}).
+See also the [privacy notice]({{ '/privacy/' | relative_url }}) and [cookie policy]({{ '/cookies/' | relative_url }}).
