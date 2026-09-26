@@ -1,7 +1,7 @@
 # Site compliance and accessibility audit
 
 **Reviewed:** 26 September 2026  
-**Scope:** the public home page and the privacy, cookie, and terms-of-use pages.
+**Scope:** the public home page and the combined privacy-and-analytics page.
 
 ## Outcome
 
@@ -33,9 +33,9 @@ The site is a small, static academic website with no sales, accounts, newsletter
 
 | Request                            | Result                                                                                                                                                                                                                                         |
 | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Privacy policy                     | Implemented and expanded for hosting, analytics, email contact, retention, providers, rights, security, and changes.                                                                                                                           |
-| Terms and conditions               | Implemented as non-commercial terms of use; ordinary browsing is not presented as acceptance of a sales contract.                                                                                                                              |
-| Cookie policy and consent          | Implemented. Optional Analytics requires opt-in; theme and consent preferences are explained separately.                                                                                                                                       |
+| Privacy policy                     | Implemented as a single, proportionate privacy-and-analytics notice covering hosting, optional analytics, email contact, retention, providers, rights, security, cookies, and changes.                                                         |
+| Terms and conditions               | Not applicable and intentionally omitted because the site is informational, non-commercial, and creates no account or transaction.                                                                                                             |
+| Cookie policy and consent          | Consent is implemented, but a separate cookie page is intentionally omitted. Necessary cookie and storage information is included in the privacy notice without exposing implementation identifiers.                                           |
 | Refund policy                      | Not applicable and intentionally omitted because the site has no sales, payments, subscriptions, donations, or checkout.                                                                                                                       |
 | Form consent and keyboard support  | No web form exists. The contact action is a clear `mailto:` link, so no fictitious checkbox was added. All interactive elements are keyboard operable.                                                                                         |
 | Data minimisation and analytics    | Implemented in site code and GA property configuration; only consented standard page views remain.                                                                                                                                             |
