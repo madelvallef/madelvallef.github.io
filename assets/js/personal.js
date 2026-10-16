@@ -77,6 +77,8 @@
   });
 
   const previewAspectRatio = 615 / 792;
+  const minPreviewWidth = 185;
+  const maxPreviewShare = 0.4;
   const paperPreviews = [...document.querySelectorAll(".paper")];
   let previewSyncFrame;
 
@@ -86,19 +88,42 @@
 
     paperPreviews.forEach((paper) => {
       const abstract = paper.querySelector(".paper__abstract");
-      if (!abstract || !wideLayout) {
+      const body = paper.querySelector(".paper__body");
+      const content = paper.querySelector(".paper__content");
+      if (!abstract || !body || !content || !wideLayout) {
+        paper.classList.remove("paper--stacked");
         paper.style.removeProperty("--paper-preview-width");
         return;
       }
 
       if (!abstract.open) return;
 
-      const targetWidth = Math.ceil(abstract.getBoundingClientRect().height * previewAspectRatio);
-      const currentWidth = Number.parseFloat(paper.style.getPropertyValue("--paper-preview-width"));
+      // Widening the preview narrows the text column and makes it taller, so a one-shot
+      // measurement can run away. Search for the narrowest preview whose height covers the
+      // text; when none exists below the cap, stack the preview above the text instead.
+      paper.classList.remove("paper--stacked");
+      const coversText = (width) => {
+        paper.style.setProperty("--paper-preview-width", `${width}px`);
+        return width / previewAspectRatio >= body.getBoundingClientRect().height;
+      };
 
-      if (!Number.isFinite(currentWidth) || Math.abs(targetWidth - currentWidth) > 1) {
-        paper.style.setProperty("--paper-preview-width", `${targetWidth}px`);
+      let low = minPreviewWidth;
+      let high = Math.max(minPreviewWidth, Math.floor(content.clientWidth * maxPreviewShare));
+      if (coversText(low)) {
+        high = low;
+      } else if (coversText(high)) {
+        while (high - low > 1) {
+          const middle = Math.floor((low + high) / 2);
+          if (coversText(middle)) high = middle;
+          else low = middle;
+        }
+      } else {
+        paper.style.removeProperty("--paper-preview-width");
+        paper.classList.add("paper--stacked");
+        return;
       }
+
+      paper.style.setProperty("--paper-preview-width", `${high}px`);
     });
   };
 
@@ -110,7 +135,7 @@
   if (paperPreviews.length && "ResizeObserver" in window) {
     const previewObserver = new ResizeObserver(schedulePaperPreviewSync);
     paperPreviews.forEach((paper) => {
-      paper.querySelector(".paper__abstract") && previewObserver.observe(paper.querySelector(".paper__abstract"));
+      paper.querySelector(".paper__body") && previewObserver.observe(paper.querySelector(".paper__body"));
       paper.querySelector(".paper__abstract")?.addEventListener("toggle", schedulePaperPreviewSync);
     });
     window.addEventListener("resize", schedulePaperPreviewSync, { passive: true });
