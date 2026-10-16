@@ -7,11 +7,12 @@
     - name: Miguel Del Valle
     - name: Federico Huneeus
       url: https://www.fedehuneeus.com/
-  status: Submitted
+  status: Revision requested at the *Journal of International Economics*
   pdf_label: Latest Version
   pdf: https://www.fedehuneeus.com/s/HdV.pdf
   bid_working_paper_label: IDB Working Paper 01858
   bid_working_paper: https://publications.iadb.org/en/geographic-and-sectoral-impact-productivity
+  data_label: Disaggregated Economic Accounts for Chile
   data: https://dataterritorios.corfo.cl/disaggregated-economic-accounts/
   bibtex: /assets/bibliography/geographic-sectoral-productivity.bib
   preview: /assets/img/research/geographic-sectoral-productivity.png
@@ -40,3 +41,72 @@
     - Input-Output Linkages
     - Trade
     - Labor Mobility
+- id: welfare-natural-disasters
+  section: work-in-progress
+  order: 1
+  title: Welfare Effects of Natural Disasters
+  authors:
+    - name: Miguel Del Valle
+    - name: Federico Huneeus
+      url: https://www.fedehuneeus.com/
+  abstract: >-
+    Local exposure to natural disasters can be substantially more costly than
+    aggregate uncertainty about warming trajectories. Understanding how these
+    events affect both the places they strike and the national economy is
+    therefore central to the public policy debate. We link administrative data
+    on the universe of formal firms in Chile with records of natural disasters
+    to estimate their impact on the economic activity of firms in directly
+    affected locations. We then combine these elasticities with geographically
+    and sectorally disaggregated economic accounts for Chile in a quantitative
+    spatial general equilibrium model in which local shocks propagate across
+    locations and sectors through domestic trade, input-output linkages, and
+    labor mobility. The framework allows us to quantify the aggregate and
+    distributional welfare effects of natural disasters, separating direct local
+    losses from their propagation to the rest of the economy and identifying the
+    locations and sectors that bear the largest costs.
+- id: port-development-networks
+  section: work-in-progress
+  order: 2
+  title: Port Development in Networks
+  authors:
+    - name: Miguel Del Valle
+    - name: Federico Huneeus
+      url: https://www.fedehuneeus.com/
+  abstract: >-
+    Ports are large, long-lived investments whose effects reach far beyond the
+    regions where they are built, because they shape trade costs for the entire
+    economy. We study the optimal size and location of ports in an
+    interconnected economy. We use temporary port disruptions, together with vessel-tracking (AIS) data and
+    customs records, to estimate how shippers substitute across ports and
+    transport modes, the value of time in transit, and how congestion at
+    terminals responds to traffic and installed capacity. We then combine these
+    estimates with geographically and sectorally disaggregated economic accounts
+    for Chile in a quantitative spatial general equilibrium model with
+    production networks and labor mobility, in which trade costs arise
+    endogenously from shippers' choices of transport mode and port. We use the
+    model to evaluate how expanding or relocating port capacity reshapes trade
+    costs, economic activity, and welfare across locations and sectors, and
+    where additional capacity yields the largest gains.
+- id: geography-industrial-policy
+  section: work-in-progress
+  order: 3
+  title: The Geography of Industrial Policy
+  authors:
+    - name: Miguel Del Valle
+    - name: Federico Huneeus
+      url: https://www.fedehuneeus.com/
+  abstract: >-
+    Industrial policy has returned to the center of the policy debate, yet its
+    effects are usually measured only on the firms it supports. We study how the
+    effects of industrial policy spread across firms, locations, and sectors,
+    and how much of them reach the national economy. We use administrative data
+    on Chilean firms, together with detailed administrative records on
+    applications to the support programs of Chile's economic development agency,
+    to estimate the effects of public support on the firms that receive it. We
+    then combine these estimates with geographically and sectorally
+    disaggregated economic accounts for Chile in a quantitative spatial general
+    equilibrium model with a rich government sector, in which the effects on
+    supported firms propagate through production networks and labor mobility.
+    This lets us estimate the marginal value of public funds (MVPF) of these
+    programs, accounting for general equilibrium spillovers and their fiscal
+    effects, and identify where public support yields the largest returns.

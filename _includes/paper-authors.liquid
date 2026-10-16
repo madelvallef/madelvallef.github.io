@@ -1,0 +1,22 @@
+<p class="paper__authors">
+  <span>with</span>
+  {% assign has_collaborator = false %}
+  {% for author in include.paper.authors %}
+    {% unless author.name == site.data.profile.name %}
+      {% if has_collaborator -%}
+        <span aria-hidden="true"> · </span>
+      {%- endif %}
+      {% if author.url -%}
+        <a href="{{ author.url }}" target="_blank" rel="noopener">{{ author.name }}</a>
+      {%- else -%}
+        {{- author.name -}}
+      {%- endif %}
+      {% assign has_collaborator = true %}
+    {% endunless %}
+  {% endfor %}
+  {% if include.paper.status -%}
+    <span class="paper__status"
+      ><span class="sr-only">Status: </span>{{ include.paper.status | markdownify | remove: '<p>' | remove: '</p>' | strip -}}
+    </span>
+  {%- endif %}
+</p>

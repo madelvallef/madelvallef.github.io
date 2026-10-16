@@ -76,9 +76,10 @@
           <a href="#about" data-nav-link aria-current="page">About</a>
           <a href="#working-papers" data-nav-link>Working Papers</a>
           <a href="#work-in-progress" data-nav-link>Work in Progress</a>
+          <a href="#policy" data-nav-link>Policy</a>
           <a href="#references" data-nav-link>References</a>
           <a href="#teaching" data-nav-link>Teaching</a>
-          <a href="{{ site.data.profile.cv | relative_url }}" target="_blank" rel="noopener">CV <span aria-hidden="true">↗</span></a>
+          <a href="{{ site.data.profile.cv | relative_url }}" target="_blank" rel="noopener">CV</a>
           <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" title="Toggle color theme">
             <svg aria-hidden="true" viewBox="0 0 24 24">
               <path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.16-1.42 1.42m-9.88 9.88-1.42 1.42M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>
@@ -100,9 +101,7 @@
               {% endfor %}
             </div>
             <div class="intro__actions">
-              <a class="button button--solid" href="{{ site.data.profile.cv | relative_url }}" target="_blank" rel="noopener"
-                >View CV <span aria-hidden="true">↗</span></a
-              >
+              <a class="button button--solid" href="{{ site.data.profile.cv | relative_url }}" target="_blank" rel="noopener">View CV</a>
               <a class="text-link" href="mailto:{{ site.data.profile.emails.last }}">Email Miguel <span aria-hidden="true">→</span></a>
             </div>
           </div>
@@ -186,27 +185,8 @@
             {% for paper in papers %}
               <article class="paper" aria-labelledby="{{ paper.id }}-title">
                 <div class="paper__header">
-                  <div class="paper__title-row">
-                    <h3 id="{{ paper.id }}-title">{{ paper.title }}</h3>
-                    <span class="paper__status paper__status--v2">{{ paper.status }}</span>
-                  </div>
-                  <p class="paper__authors">
-                    <span>with</span>
-                    {% assign has_collaborator = false %}
-                    {% for author in paper.authors %}
-                      {% unless author.name == site.data.profile.name %}
-                        {% if has_collaborator -%}
-                          <span aria-hidden="true"> · </span>
-                        {%- endif %}
-                        {% if author.url -%}
-                          <a href="{{ author.url }}" target="_blank" rel="noopener">{{ author.name }}</a>
-                        {%- else -%}
-                          {{- author.name -}}
-                        {%- endif %}
-                        {% assign has_collaborator = true %}
-                      {% endunless %}
-                    {% endfor %}
-                  </p>
+                  <h3 id="{{ paper.id }}-title">{{ paper.title }}</h3>
+                  {% include paper-authors.liquid paper=paper %}
                 </div>
                 <div class="paper__content">
                   {% if paper.preview %}
@@ -223,33 +203,41 @@
                       {% endif %}
                     </details>
                     <div class="paper__links" aria-label="{{ paper.title }} resources">
-                      {% if paper.pdf -%}
-                        <a href="{{ paper.pdf }}" target="_blank" rel="noopener">
-                          {{- paper.pdf_label | default: 'Paper' }}
-                          <span aria-hidden="true">↗</span></a
-                        >
-                      {%- endif %}
-                      {% if paper.bid_working_paper -%}
-                        <a href="{{ paper.bid_working_paper }}" target="_blank" rel="noopener">
-                          {{- paper.bid_working_paper_label | default: 'IDB Working Paper' }}
-                          <span aria-hidden="true">↗</span></a
-                        >
-                      {%- endif %}
-                      {% if paper.bibtex -%}
-                        <a href="{{ paper.bibtex | relative_url }}" download>BibTeX <span aria-hidden="true">↓</span></a>
-                      {%- endif %}
-                      {% if paper.slides -%}
-                        <a href="{{ paper.slides }}" target="_blank" rel="noopener">Slides <span aria-hidden="true">↗</span></a>
-                      {%- endif %}
-                      {% if paper.appendix -%}
-                        <a href="{{ paper.appendix }}" target="_blank" rel="noopener">Appendix <span aria-hidden="true">↗</span></a>
-                      {%- endif %}
-                      {% if paper.code -%}
-                        <a href="{{ paper.code }}" target="_blank" rel="noopener">Code <span aria-hidden="true">↗</span></a>
-                      {%- endif %}
-                      {% if paper.data -%}
-                        <a href="{{ paper.data }}" target="_blank" rel="noopener">Data <span aria-hidden="true">↗</span></a>
-                      {%- endif %}
+                      {% if paper.pdf or paper.data %}
+                        <div class="paper__links-row">
+                          {% if paper.pdf -%}
+                            <a href="{{ paper.pdf }}" target="_blank" rel="noopener">
+                              {{- paper.pdf_label | default: 'Paper' -}}
+                            </a>
+                          {%- endif %}
+                          {% if paper.data -%}
+                            <a href="{{ paper.data }}" target="_blank" rel="noopener">
+                              {{- paper.data_label | default: 'Data' -}}
+                            </a>
+                          {%- endif %}
+                        </div>
+                      {% endif %}
+                      {% if paper.bibtex or paper.bid_working_paper or paper.slides or paper.appendix or paper.code %}
+                        <div class="paper__links-row">
+                          {% if paper.bibtex -%}
+                            <a href="{{ paper.bibtex | relative_url }}" download>BibTeX <span aria-hidden="true">↓</span></a>
+                          {%- endif %}
+                          {% if paper.bid_working_paper -%}
+                            <a href="{{ paper.bid_working_paper }}" target="_blank" rel="noopener">
+                              {{- paper.bid_working_paper_label | default: 'IDB Working Paper' -}}
+                            </a>
+                          {%- endif %}
+                          {% if paper.slides -%}
+                            <a href="{{ paper.slides }}" target="_blank" rel="noopener">Slides</a>
+                          {%- endif %}
+                          {% if paper.appendix -%}
+                            <a href="{{ paper.appendix }}" target="_blank" rel="noopener">Appendix</a>
+                          {%- endif %}
+                          {% if paper.code -%}
+                            <a href="{{ paper.code }}" target="_blank" rel="noopener">Code</a>
+                          {%- endif %}
+                        </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -269,6 +257,42 @@
             {% for work in works_in_progress %}
               <article class="wip">
                 <h3>{{ work.title }}</h3>
+                {% if work.authors %}
+                  {% include paper-authors.liquid paper=work %}
+                {% endif %}
+                {% if work.abstract %}
+                  <p class="wip__abstract">{{ work.abstract }}</p>
+                {% endif %}
+              </article>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--quiet" id="policy" aria-labelledby="policy-title">
+        <div class="section-shell">
+          <div class="section-heading">
+            <h2 id="policy-title">Policy</h2>
+          </div>
+          <div class="policy-list">
+            {% for item in site.data.policy %}
+              <article class="policy-entry">
+                <h3>
+                  <a
+                    href="{{ item.url }}"
+                    target="_blank"
+                    rel="noopener"
+                    {% if item.hreflang %}
+                      hreflang="{{ item.hreflang }}"
+                    {% endif %}
+                  >
+                    {{- item.title -}}
+                  </a>
+                  {%- if item.language %}
+                    <span class="policy-entry__language">({{ item.language }})</span>
+                  {%- endif %}
+                </h3>
+                <p class="policy-entry__date">{{ item.date }}</p>
               </article>
             {% endfor %}
           </div>
@@ -294,7 +318,7 @@
                 </p>
                 <p class="reference__links">
                   <a href="mailto:{{ reference.email }}">{{ reference.email }}</a
-                  ><a href="{{ reference.website }}" target="_blank" rel="noopener">Website <span aria-hidden="true">↗</span></a>
+                  ><a href="{{ reference.website }}" target="_blank" rel="noopener">Website</a>
                 </p>
               </article>
             {% endfor %}

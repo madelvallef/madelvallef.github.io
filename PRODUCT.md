@@ -25,7 +25,7 @@ An economist who combines disaggregated economic accounts with frontier quantita
 - Primary action: read a working paper or download the CV.
 - Secondary action: contact Miguel Del Valle or visit a professional profile.
 - Visitor takeaway: a precise, research-led profile rather than a generic personal portfolio.
-- Proof on hand: one submitted working paper, professional biography, CV, and named academic references.
+- Proof on hand: one working paper with a revision requested at the Journal of International Economics, professional biography, CV, and named academic references.
 
 ## Brand Personality
 
