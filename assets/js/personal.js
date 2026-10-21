@@ -141,4 +141,36 @@
     window.addEventListener("resize", schedulePaperPreviewSync, { passive: true });
     schedulePaperPreviewSync();
   }
+
+  // Entrance motion: each [data-reveal] element animates in once, the first time it scrolls
+  // into view. The head script only sets html.motion when this can run.
+  window.clearTimeout(window.motionFallback);
+  const revealStagger = 70;
+
+  if (document.documentElement.classList.contains("motion")) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
+          .forEach((entry, index) => {
+            const element = entry.target;
+            revealObserver.unobserve(element);
+            // Elements that enter together cascade instead of appearing at once.
+            element.style.setProperty("--reveal-delay", `${index * revealStagger}ms`);
+            element.setAttribute("data-revealed", "");
+            const finishReveal = (event) => {
+              const ownTransition = event.target === element || event.propertyName === "clip-path";
+              if (!element.contains(event.target) || !ownTransition) return;
+              element.removeEventListener("transitionend", finishReveal);
+              element.style.removeProperty("--reveal-delay");
+              element.setAttribute("data-revealed", "done");
+            };
+            element.addEventListener("transitionend", finishReveal);
+          });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+    document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
+  }
 })();

@@ -47,6 +47,7 @@
   --serif: "Alegreya", Georgia, serif;
   --sans: "Public Sans", Arial, sans-serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 :root[data-theme="dark"] {
@@ -341,6 +342,10 @@ h3 {
   min-height: 2.9rem;
   padding: 0.55rem 1rem;
   text-decoration: none;
+  transition: transform 160ms var(--ease);
+}
+.button:active {
+  transform: scale(0.97);
 }
 
 .button--solid {
@@ -1134,6 +1139,76 @@ h3 {
   .site-footer .section-shell {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+/* Entrance motion. Applies only under html.motion, which the head script sets when the
+   reveal observer can run and reduced motion is not requested. The hero cascades in on load
+   as four pieces over a still landscape, settling within about 0.7s so it reads as
+   choreography rather than loading; [data-reveal] elements play once, the first time they
+   scroll into view. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.motion .intro__identity > *,
+.motion .intro__aside {
+  animation: rise 500ms var(--ease) both;
+}
+.motion .intro__lead {
+  animation-delay: 60ms;
+}
+.motion .intro__actions {
+  animation-delay: 120ms;
+}
+.motion .intro__aside {
+  animation-delay: 180ms;
+}
+
+.motion [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 600ms var(--ease) var(--reveal-delay, 0ms),
+    transform 600ms var(--ease) var(--reveal-delay, 0ms);
+}
+.motion [data-reveal][data-revealed] {
+  opacity: 1;
+  transform: none;
+}
+/* The preview clips its image rather than the observed link: a target whose own clip-path
+   leaves no visible area never reports an intersection. */
+.motion [data-reveal="unveil"] {
+  background: transparent;
+  opacity: 1;
+  transform: none;
+}
+.motion [data-reveal="unveil"] img {
+  clip-path: inset(0 0 100% 0);
+  transition:
+    clip-path 800ms var(--ease-in-out) var(--reveal-delay, 0ms),
+    transform 180ms var(--ease);
+}
+.motion [data-reveal="unveil"][data-revealed] img {
+  clip-path: inset(0 0 0 0);
+}
+
+@media print {
+  .motion [data-reveal],
+  .motion [data-reveal="unveil"] img,
+  .motion .intro__identity > *,
+  .motion .intro__aside {
+    animation: none;
+    clip-path: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
