@@ -1,6 +1,6 @@
 # Miguel Del Valle — Academic Website
 
-This repository builds the personal research website at [madelvallef.github.io](https://madelvallef.github.io). It is a root-level GitHub Pages user site powered by Jekyll, with a deliberately small local interface layer.
+This repository builds the personal research website at [miguel-delvalle.com](https://miguel-delvalle.com). It is a root-level GitHub Pages user site (`madelvallef.github.io`) on a custom domain, powered by Jekyll, with a deliberately small local interface layer.
 
 ## Local development
 
