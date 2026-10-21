@@ -1,0 +1,11 @@
+{%- comment -%}
+  Cloudflare Web Analytics: cookieless, aggregate page-view counts. Production builds only, so
+  local previews are not counted.
+{%- endcomment -%}
+{% if site.cloudflare_web_analytics_token and jekyll.environment == 'production' %}
+  <script
+    type="module"
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "{{ site.cloudflare_web_analytics_token }}"}'
+  ></script>
+{% endif %}
