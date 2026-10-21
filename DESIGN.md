@@ -30,4 +30,4 @@ Light mode uses a near-neutral cool canvas, deep blue-green ink, and a restraine
 
 ## Motion
 
-Only lightweight color and position transitions are used for interactive feedback. All movement is neutralized when reduced motion is requested.
+Motion supports reading order for a first-time visitor and never decorates. On load the hero cascades in as four pieces (name, biography, actions, profile column), rising 8px with 60ms between them over a still landscape. It settles within about 0.7s, so it reads as choreography rather than loading. Below it, section content rises 12px and fades in once, the first time it scrolls into view. Elements that enter together cascade at 70ms, and the paper preview wipes in from the top. Interactive feedback stays lightweight: color transitions, a 3px lift on the paper preview, and a 0.97 press on buttons. Only `opacity`, `transform`, and `clip-path` animate, with the `--ease` and `--ease-in-out` tokens. When reduced motion is requested, or the reveal script cannot run, the motion is skipped and all content shows immediately.

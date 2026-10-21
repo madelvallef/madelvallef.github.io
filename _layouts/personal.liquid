@@ -9,7 +9,19 @@
     <title>{{ page.title | default: site.title | escape }}</title>
     <link rel="canonical" href="{{ site.url }}{{ page.url | relative_url }}">
     <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+    <link rel="preload" href="{{ '/assets/fonts/alegreya/Alegreya-Variable.ttf' | relative_url }}" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="{{ '/assets/fonts/public-sans/PublicSans-Variable.ttf' | relative_url }}" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/personal.css' | relative_url }}">
+    <script>
+      // Opt into entrance motion before first paint so revealed content never flashes.
+      // personal.js clears the fallback; if it fails to load, the content is shown anyway.
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('motion');
+        window.motionFallback = setTimeout(function () {
+          document.documentElement.classList.remove('motion');
+        }, 3000);
+      }
+    </script>
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ site.title | escape }}">
     <meta property="og:description" content="{{ site.description | strip_html | normalize_whitespace | escape }}">
@@ -177,24 +189,31 @@
 
       <section class="section section--research" id="working-papers" aria-labelledby="working-papers-title">
         <div class="section-shell">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <h2 id="working-papers-title">Working Papers</h2>
           </div>
           <div class="paper-list">
             {% assign papers = site.data.research | where: 'section', 'working-papers' | sort: 'order' %}
             {% for paper in papers %}
               <article class="paper" aria-labelledby="{{ paper.id }}-title">
-                <div class="paper__header">
+                <div class="paper__header" data-reveal>
                   <h3 id="{{ paper.id }}-title">{{ paper.title }}</h3>
                   {% include paper-authors.liquid paper=paper %}
                 </div>
                 <div class="paper__content">
                   {% if paper.preview %}
-                    <a class="paper__preview" href="{{ paper.pdf }}" target="_blank" rel="noopener" aria-label="Open {{ paper.title }} PDF">
+                    <a
+                      class="paper__preview"
+                      data-reveal="unveil"
+                      href="{{ paper.pdf }}"
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="Open {{ paper.title }} PDF"
+                    >
                       <img src="{{ paper.preview | relative_url }}" width="615" height="792" loading="lazy" alt="{{ paper.preview_alt }}">
                     </a>
                   {% endif %}
-                  <div class="paper__body">
+                  <div class="paper__body" data-reveal>
                     <details class="paper__abstract" open>
                       <summary>Abstract</summary>
                       <p>{{ paper.abstract }}</p>
@@ -249,13 +268,13 @@
 
       <section class="section section--quiet" id="work-in-progress" aria-labelledby="work-in-progress-title">
         <div class="section-shell">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <h2 id="work-in-progress-title">Work in Progress</h2>
           </div>
           <div class="wip-list">
             {% assign works_in_progress = site.data.research | where: 'section', 'work-in-progress' | sort: 'order' %}
             {% for work in works_in_progress %}
-              <article class="wip">
+              <article class="wip" data-reveal>
                 <h3>{{ work.title }}</h3>
                 {% if work.authors %}
                   {% include paper-authors.liquid paper=work %}
@@ -271,12 +290,12 @@
 
       <section class="section section--quiet" id="policy" aria-labelledby="policy-title">
         <div class="section-shell">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <h2 id="policy-title">Policy</h2>
           </div>
           <div class="policy-list">
             {% for item in site.data.policy %}
-              <article class="policy-entry">
+              <article class="policy-entry" data-reveal>
                 <h3>
                   <a
                     href="{{ item.url }}"
@@ -301,13 +320,13 @@
 
       <section class="section" id="references" aria-labelledby="references-title">
         <div class="section-shell">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <h2 id="references-title">References</h2>
           </div>
           <div class="reference-list">
             {% assign references = site.data.references | sort: 'order' %}
             {% for reference in references %}
-              <article class="reference">
+              <article class="reference" data-reveal>
                 <h3>{{ reference.name }}</h3>
                 <p class="reference__position">
                   <span>{{ reference.title }}</span>
@@ -328,12 +347,12 @@
 
       <section class="section section--teaching" id="teaching" aria-labelledby="teaching-title">
         <div class="section-shell">
-          <div class="section-heading">
+          <div class="section-heading" data-reveal>
             <h2 id="teaching-title">Teaching</h2>
           </div>
           <div class="teaching-list">
             {% for appointment in site.data.teaching %}
-              <article class="teaching-entry">
+              <article class="teaching-entry" data-reveal>
                 <p class="teaching-entry__period">{{ appointment.period }}</p>
                 <div class="teaching-entry__detail">
                   <h3>{{ appointment.role }}</h3>
