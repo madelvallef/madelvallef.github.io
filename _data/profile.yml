@@ -28,6 +28,7 @@ linkedin: https://www.linkedin.com/in/madelvallef/
 twitter: https://x.com/madelvallef
 orcid: https://orcid.org/0009-0005-9011-6414
 google_scholar: https://scholar.google.com/citations?user=9qeWIBAAAAAJ&hl
-cv: /assets/files/miguel-del-valle-cv.pdf
+# The CV links (nav and hero) render only when cv is set. Restore once the updated CV is uploaded.
+# cv: /assets/files/miguel-del-valle-cv.pdf
 portrait: /assets/img/profile/miguel-del-valle.webp
 portrait_alt: Portrait of Miguel Del Valle
